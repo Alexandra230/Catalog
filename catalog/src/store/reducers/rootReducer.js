@@ -1,6 +1,5 @@
 import authReducer from './authReducer';
 import cardReducer from './cardReducer';
-
 import { combineReducers } from 'redux';
 import { firestoreReducer } from 'redux-firestore';
 

@@ -22,7 +22,9 @@ class CreateCard extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    //console.log(this.state);
+    this.props.createCard(this.state);
+    this.props.history.push('/');
   };
   render() {
     return (
@@ -62,4 +64,4 @@ const mapDispatchToProps = (dispatch) => {
     createCard: (card) => dispatch(createCard(card)),
   };
 };
-export default connect()(CreateCard);
+export default connect(null, mapDispatchToProps)(CreateCard);

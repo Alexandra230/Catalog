@@ -1,6 +1,8 @@
-import firebase from 'firebase/compat/app';
+//import firebase from 'firebase/compat/app';
+import firebase from '@firebase/app-compat';
+
 import 'firebase/compat/firestore';
-import 'firebase/compat/auth';
+import 'firebase/auth';
 const firebaseConfig = {
   apiKey: 'AIzaSyDuCsaAVBZPTiEi1pp0322QE15Nk-GyG3M',
   authDomain: 'catalog-d2e56.firebaseapp.com',

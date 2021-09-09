@@ -8,7 +8,7 @@ const CardList = ({ cards }) => {
       {cards &&
         cards.map((card) => {
           return (
-            <Link t={'/card/' + card.id}>
+            <Link to={'/card/' + card.id}>
               <CardSummary card={card} key={card.id} />;
             </Link>
           );
