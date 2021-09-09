@@ -1,18 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { createCard } from '../../store/actions/cardActions';
+
 class CreateCard extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     file: null,
-  //   };
-  //   this.handleChange = this.handleChange.bind(this);
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: null,
+    };
+
+    this.onImageChange = this.onImageChange.bind(this);
+  }
+
+  onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      let img = event.target.files[0];
+      this.setState({
+        image: URL.createObjectURL(img),
+      });
+    }
+  };
   state = {
-    //image: '',
+    image: '',
     title: '',
     content: '',
+    cost: '',
   };
   handleChange = (e) => {
     this.setState({
@@ -27,16 +40,18 @@ class CreateCard extends Component {
     this.props.history.push('/');
   };
   render() {
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to="/signin" />;
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="white">
           <h5 className="grey-text text-darken-3">Create a new card</h5>
 
-          {/* <div className="input-field">
-            <label htmlFor="file"></label>
-            <input type="file" id="file" onChange={this.handleChange} />
-            <img src={this.state.file} className="img-thumbnail" />
-          </div> */}
+          <div className="input-field">
+            <img className="img-fluid" src={this.state.image} />
+            <p>Select Image</p>
+            <input type="file" name="myImage" onChange={this.onImageChange} />
+          </div>
 
           <div className="input-field">
             <label htmlFor="title">Title</label>
@@ -52,6 +67,11 @@ class CreateCard extends Component {
           </div>
 
           <div className="input-field">
+            <label htmlFor="cost">Cost</label>
+            <input type="text" id="cost" onChange={this.handleChange} />
+          </div>
+
+          <div className="input-field">
             <button className="btn info lighten-1">Create</button>
           </div>
         </form>
@@ -59,9 +79,14 @@ class CreateCard extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+  };
+};
 const mapDispatchToProps = (dispatch) => {
   return {
     createCard: (card) => dispatch(createCard(card)),
   };
 };
-export default connect(null, mapDispatchToProps)(CreateCard);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateCard);

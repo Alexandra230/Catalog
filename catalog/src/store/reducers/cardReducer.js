@@ -5,18 +5,21 @@ const initState = {
       //file: 'C:\\fakepath\\20180922_114713.mp4',
       title: 'SSSSS',
       content: 'bla bla bla bla bla0',
+      cost: '200',
     },
     {
       id: '2',
       //file: 'C:\\fakepath\\20180922_114713.mp4',
       title: 'DDD',
       content: 'bla bla bla bla bla0',
+      cost: '200',
     },
     {
       id: '3',
       //file: 'C:\\fakepath\\20180922_114713.mp4',
       title: 'BBB',
       content: 'bla bla bla bla bla0',
+      cost: '200',
     },
   ],
 };

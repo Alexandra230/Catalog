@@ -1,13 +1,13 @@
 export const createCard = (card) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
+    const authorId = getState().firebase.auth.uid;
     firestore
       .collection('cards')
       .add({
         ...card,
-        authorFirstName: 'Alex',
-        authorLastName: 'Lunhol',
-        authorId: 12345,
+
+        authorId: authorId,
         createAt: new Date(),
       })
       .then(() => {
